@@ -3,466 +3,489 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Saksham Support - Modern Accessibility</title>
+    <title>Saksham Support - Ultimate Store</title>
+    <!-- Icons -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap" rel="stylesheet">
 
     <style>
-        /* --- VARIABLES --- */
+        /* --- 1. GLOBAL VARIABLES & RESET --- */
         :root {
-            --primary-dark: #0f3d36;   /* Dark Green for Navbar/Footer */
-            --primary-green: #2e7d32;  /* Standard Green */
-            --accent: #ffb74d;         /* Orange for CTA */
-            --bg-light: #e8f5e9;       /* Very Light Green Background */
-            --glass-dark: rgba(15, 61, 54, 0.90); /* Dark Glass */
-            --glass-light: rgba(255, 255, 255, 0.6); /* Light Glass for cards */
-            --text-dark: #1a1a1a;
-            --text-light: #f1f1f1;
+            --primary-dark: #052e28;
+            --primary-green: #2e7d32;
+            --neon-green: #00e676; /* Punchy highlight */
+            --soft-bg: #f0f7f4;
+            --glass-nav: rgba(16, 65, 56, 0.85);
+            --glass-card: rgba(255, 255, 255, 0.8);
+            --text-main: #1a1a1a;
+            --text-white: #ffffff;
+            --bounce: cubic-bezier(0.68, -0.55, 0.265, 1.55); /* Bouncy Effect */
         }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Poppins', sans-serif;
-            scroll-behavior: smooth;
-        }
-
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+        
+        html { scroll-behavior: smooth; }
+        
         body {
-            background: linear-gradient(180deg, #f1f8e9 0%, #dcedc8 100%); /* Halka Green Texture */
-            color: var(--text-dark);
+            background-color: var(--soft-bg);
+            color: var(--text-main);
             overflow-x: hidden;
         }
 
-        /* --- DARK GLASS NAVBAR --- */
+        /* --- 2. ROUNDED FLOATING NAVBAR --- */
         nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 15px 5%;
-            background: var(--glass-dark); /* Dark Transparent */
-            backdrop-filter: blur(15px);
             position: sticky;
-            top: 0;
-            z-index: 1000;
-            border-bottom: 1px solid rgba(255,255,255,0.1);
-            box-shadow: 0 4px 20px rgba(0,0,0,0.2);
-        }
-
-        .logo-area {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-        }
-
-        .logo-img {
-            width: 45px;
-            height: 45px;
-            border-radius: 50%;
-            border: 2px solid var(--accent);
-        }
-
-        .brand {
-            font-size: 1.4rem;
-            font-weight: 700;
-            color: var(--text-light);
-            letter-spacing: 1px;
-        }
-
-        .nav-links a {
-            text-decoration: none;
-            color: rgba(255,255,255,0.8);
-            margin-left: 30px;
-            font-size: 0.95rem;
-            transition: 0.3s;
-        }
-
-        .nav-links a:hover {
-            color: var(--accent);
-        }
-
-        /* --- HERO SECTION (Modern Fade) --- */
-        .hero {
-            height: 80vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            padding: 0 20px;
-            position: relative;
-            /* Background image placeholder - nature/calm */
-            background: url('https://images.unsplash.com/photo-1518531933037-91b2f5f229cc?ixlib=rb-1.2.1&auto=format&fit=crop&w=1920&q=80') no-repeat center center/cover;
-        }
-
-        /* Overlay to fade content */
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: linear-gradient(to bottom, rgba(232, 245, 233, 0.4), var(--bg-light));
-        }
-
-        .hero-content {
-            position: relative;
-            z-index: 2;
-            background: rgba(255, 255, 255, 0.2);
-            backdrop-filter: blur(5px);
-            padding: 40px;
-            border-radius: 20px;
-            border: 1px solid rgba(255,255,255,0.5);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-            animation: fadeIn Up 1s ease;
-        }
-
-        .hero h1 {
-            font-size: 3rem;
-            color: var(--primary-dark);
-            margin-bottom: 15px;
-        }
-
-        /* --- SHOPPING SECTION (Stack Cards) --- */
-        .section-title {
-            text-align: center;
-            font-size: 2.2rem;
-            color: var(--primary-dark);
-            margin: 60px 0 40px;
-        }
-
-        .shop-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 30px;
-            padding: 0 10%;
-        }
-
-        .product-card {
-            background: white;
-            border-radius: 20px;
-            padding: 20px;
-            position: relative;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.05);
-            transition: transform 0.3s;
-            border: 1px solid rgba(0,0,0,0.05);
-        }
-
-        .product-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 35px rgba(46, 125, 50, 0.2);
-        }
-
-        .badge {
-            position: absolute;
-            top: 15px;
-            right: 15px;
-            background: #ef5350;
-            color: white;
-            padding: 5px 10px;
-            border-radius: 10px;
-            font-size: 0.8rem;
-            font-weight: bold;
-        }
-
-        .product-img {
-            width: 100%;
-            height: 150px;
-            background: #f5f5f5;
-            border-radius: 15px;
-            margin-bottom: 15px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 3rem;
-            color: #ccc;
-        }
-
-        .price-box {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            margin: 10px 0;
-        }
-
-        .old-price {
-            text-decoration: line-through;
-            color: #888;
-            font-size: 0.9rem;
-        }
-
-        .new-price {
-            color: var(--primary-green);
-            font-weight: 700;
-            font-size: 1.2rem;
-        }
-
-        .uses {
-            font-size: 0.85rem;
-            color: #666;
-            background: #e8f5e9;
-            padding: 8px;
-            border-radius: 8px;
-            margin-top: 10px;
-        }
-
-        /* --- DISCOUNT BANNER --- */
-        .discount-banner {
-            margin: 80px 5%;
-            background: linear-gradient(135deg, var(--primary-green), #66bb6a);
-            border-radius: 30px;
-            padding: 40px;
-            color: white;
+            top: 20px;
+            margin: 0 20px; /* Floating effect */
+            border-radius: 50px; /* Fully Rounded */
+            background: var(--glass-nav);
+            backdrop-filter: blur(12px);
+            padding: 10px 30px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            box-shadow: 0 20px 40px rgba(46, 125, 50, 0.3);
-        }
-
-        .discount-text h2 { font-size: 2rem; margin-bottom: 10px; }
-        .discount-btn {
-            background: white;
-            color: var(--primary-green);
-            padding: 12px 30px;
-            border-radius: 50px;
-            text-decoration: none;
-            font-weight: bold;
+            z-index: 1000;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
             transition: 0.3s;
         }
-        .discount-btn:hover { transform: scale(1.05); box-shadow: 0 5px 15px rgba(0,0,0,0.2); }
 
-        /* --- SERVICES (Medical & Jobs) --- */
-        .services-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 20px;
-            padding: 0 10%;
-            margin-bottom: 80px;
+        .nav-left { display: flex; align-items: center; gap: 15px; }
+        
+        .logo-img {
+            width: 45px; height: 45px; border-radius: 50%;
+            border: 2px solid var(--neon-green);
+            animation: spinLogo 10s linear infinite;
+        }
+        @keyframes spinLogo { 100% { transform: rotate(360deg); } }
+
+        .nav-center {
+            display: flex; align-items: center; gap: 20px;
         }
 
-        .service-glass {
-            background: var(--glass-light);
-            backdrop-filter: blur(10px);
-            padding: 30px;
-            border-radius: 20px;
-            border: 1px solid rgba(255,255,255,0.6);
+        .nav-link {
+            color: rgba(255,255,255,0.8); text-decoration: none;
+            font-weight: 500; font-size: 0.95rem; position: relative;
             transition: 0.3s;
+        }
+        .nav-link:hover { color: var(--neon-green); transform: translateY(-2px); }
+
+        /* Search Bar */
+        .search-box {
+            background: rgba(255,255,255,0.15);
+            border-radius: 25px; padding: 8px 20px;
+            display: flex; align-items: center;
+        }
+        .search-box input {
+            background: transparent; border: none; outline: none;
+            color: white; width: 150px; margin-right: 10px;
+        }
+        .search-box input::placeholder { color: rgba(255,255,255,0.6); }
+        .search-box i { color: var(--neon-green); cursor: pointer; }
+
+        .nav-right { display: flex; gap: 10px; }
+        
+        .btn-auth {
+            padding: 8px 20px; border-radius: 30px; font-size: 0.85rem; font-weight: 600;
+            cursor: pointer; border: none; transition: 0.3s var(--bounce);
+        }
+        .btn-login { background: transparent; color: white; border: 1px solid rgba(255,255,255,0.3); }
+        .btn-signup { background: var(--neon-green); color: var(--primary-dark); }
+        
+        .btn-auth:hover { transform: scale(1.1); box-shadow: 0 0 15px var(--neon-green); }
+
+        /* --- 3. HERO SECTION --- */
+        .hero {
+            height: 85vh; margin-top: -80px; /* Pull behind navbar */
+            background: radial-gradient(circle at 50% 50%, #e8f5e9 0%, #c8e6c9 100%);
+            display: flex; align-items: center; justify-content: center;
+            text-align: center; padding-top: 80px;
+        }
+        .hero h1 {
+            font-size: 3.5rem; color: var(--primary-dark); line-height: 1.2;
+            opacity: 0; transform: translateY(30px); animation: slideUp 1s forwards 0.5s;
+        }
+        .hero p {
+            font-size: 1.2rem; margin-top: 20px; opacity: 0;
+            animation: slideUp 1s forwards 0.8s;
+        }
+
+        /* --- 4. HORIZONTAL SHOPPING SCROLL (The Mall) --- */
+        .section-header {
+            padding: 50px 5% 20px; display: flex; justify-content: space-between; align-items: flex-end;
+        }
+        .section-title { font-size: 2rem; color: var(--primary-dark); font-weight: 800; }
+        .view-all { color: var(--primary-green); text-decoration: none; font-weight: 600; }
+
+        .scroll-container {
+            display: flex; overflow-x: auto; gap: 20px; padding: 20px 5%;
+            scroll-snap-type: x mandatory; scroll-behavior: smooth;
+            -webkit-overflow-scrolling: touch; /* Smooth mobile scroll */
+        }
+        .scroll-container::-webkit-scrollbar { display: none; } /* Hide scrollbar */
+
+        .shop-card {
+            min-width: 220px; /* Small width for more items */
+            flex-shrink: 0;
+            scroll-snap-align: start;
+            background: white; border-radius: 15px; padding: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: transform 0.3s var(--bounce);
+            cursor: pointer; position: relative; overflow: hidden;
+        }
+
+        .shop-card:hover { transform: scale(1.05) translateY(-5px); box-shadow: 0 15px 30px rgba(0,0,0,0.15); }
+        .shop-card:active { transform: scale(0.95); } /* Tap effect */
+
+        .card-media {
+            height: 140px; background: #f5f5f5; border-radius: 10px;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 3rem; color: #ddd; position: relative;
         }
         
-        .service-glass:hover { background: white; }
-        .service-glass h3 { color: var(--primary-dark); margin-bottom: 10px; }
+        /* Video Badge */
+        .video-badge {
+            position: absolute; top: 10px; right: 10px;
+            background: rgba(0,0,0,0.6); color: white;
+            width: 25px; height: 25px; border-radius: 50%;
+            display: flex; align-items: center; justify-content: center; font-size: 0.7rem;
+        }
 
-        /* --- BIG AESTHETIC FOOTER --- */
+        .card-info h4 { margin: 10px 0 5px; font-size: 1rem; }
+        .price { color: var(--primary-green); font-weight: 700; }
+        .offer { font-size: 0.7rem; color: #ef5350; background: #ffebee; padding: 2px 6px; border-radius: 4px; margin-left: 5px; }
+
+        /* --- 5. VIDEO SHOWCASE SECTION --- */
+        .video-grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px; padding: 0 5%;
+        }
+        .video-card {
+            background: #000; border-radius: 20px; height: 200px;
+            position: relative; overflow: hidden; cursor: pointer;
+            transition: 0.4s;
+        }
+        .video-card:hover { transform: scale(1.02); box-shadow: 0 20px 40px rgba(0,0,0,0.4); }
+        .play-btn {
+            position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+            width: 50px; height: 50px; background: rgba(255,255,255,0.3);
+            border-radius: 50%; backdrop-filter: blur(5px);
+            display: flex; align-items: center; justify-content: center; color: white;
+            font-size: 1.2rem; border: 2px solid white;
+            transition: 0.3s var(--bounce);
+        }
+        .video-card:hover .play-btn { background: var(--neon-green); border-color: var(--neon-green); color: black; transform: translate(-50%, -50%) scale(1.2); }
+        
+        .video-label {
+            position: absolute; bottom: 0; width: 100%; padding: 15px;
+            background: linear-gradient(to top, black, transparent);
+            color: white; font-size: 0.9rem;
+        }
+
+        /* --- 6. EXPANDED SERVICES (Grid) --- */
+        .grid-container {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px; padding: 0 5%; margin-bottom: 50px;
+        }
+        .feature-box {
+            background: white; padding: 25px; border-radius: 20px;
+            border-left: 5px solid var(--primary-green);
+            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+            transition: 0.4s var(--bounce);
+            opacity: 0; transform: translateY(50px); /* Hidden for scroll reveal */
+        }
+        .feature-box.show { opacity: 1; transform: translateY(0); }
+
+        .feature-box:hover { transform: translateY(-10px); background: #f1f8e9; }
+        
+        .feature-icon {
+            font-size: 2rem; color: var(--primary-green); margin-bottom: 15px;
+        }
+        .action-btn {
+            display: inline-block; margin-top: 15px; padding: 8px 20px;
+            background: var(--primary-dark); color: white; text-decoration: none;
+            border-radius: 20px; font-size: 0.8rem; transition: 0.3s;
+        }
+        .action-btn:hover { background: var(--neon-green); color: black; }
+
+        /* Medical Corner Specific */
+        .medical-section { background: #e3f2fd; padding: 40px 0; margin: 50px 0; border-radius: 30px; margin-left: 20px; margin-right: 20px; }
+
+        /* --- 7. FOOTER (No Gaps) --- */
+        .footer-wrapper {
+            background: var(--primary-dark);
+            margin-top: 100px; position: relative;
+        }
+        /* Wave Fix: display block + negative margin */
+        .wave-divider {
+            position: absolute; top: -100px; left: 0; width: 100%;
+            line-height: 0; pointer-events: none;
+        }
+        .wave-divider svg {
+            width: 100%; height: 100px; display: block; fill: var(--primary-dark);
+        }
+        
         footer {
-            position: relative;
-            background-color: var(--primary-dark);
-            color: white;
-            padding-top: 150px; /* Space for wave */
-            padding-bottom: 50px;
+            padding: 20px 5% 50px; color: rgba(255,255,255,0.8);
         }
-
-        /* The Wave SVG at Top of Footer */
-        .footer-wave {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            overflow: hidden;
-            line-height: 0;
+        .footer-grid {
+            display: flex; justify-content: space-between; flex-wrap: wrap; gap: 40px;
+            border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 30px;
         }
-
-        .footer-wave svg {
-            display: block;
-            width: calc(100% + 1.3px);
-            height: 150px;
+        .legal-links {
+            display: flex; gap: 20px; font-size: 0.85rem; margin-top: 20px; justify-content: center;
         }
+        .legal-links a { color: rgba(255,255,255,0.5); text-decoration: none; }
+        .legal-links a:hover { color: var(--neon-green); }
 
-        .footer-wave .shape-fill {
-            fill: #e8f5e9; /* Matches body background for seamless look */
-        }
-
-        .footer-content {
-            display: flex;
-            justify-content: space-around;
-            flex-wrap: wrap;
-            padding: 0 10%;
-            gap: 30px;
-        }
-
-        .footer-col h4 { font-size: 1.5rem; margin-bottom: 20px; color: var(--accent); }
-        .footer-col ul { list-style: none; }
-        .footer-col ul li { margin-bottom: 10px; opacity: 0.8; cursor: pointer; transition: 0.3s; }
-        .footer-col ul li:hover { color: var(--accent); opacity: 1; }
-
-        /* --- FLOATING BUTTONS (Bottom Right) --- */
-        .floating-actions {
-            position: fixed;
-            bottom: 30px;
-            right: 30px;
-            display: flex;
-            gap: 15px;
-            z-index: 2000;
-        }
-
-        .float-btn {
-            width: 55px;
-            height: 55px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.3rem;
-            color: white;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-            cursor: pointer;
-            transition: transform 0.3s;
-        }
-
-        .call-btn { background: #FF5252; animation: pulse 2s infinite; }
-        .setting-btn { background: #333; }
-
-        .float-btn:hover { transform: scale(1.1); }
-
-        /* Animations */
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
-        @keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(255, 82, 82, 0.7); } 70% { box-shadow: 0 0 0 15px rgba(255, 82, 82, 0); } 100% { box-shadow: 0 0 0 0 rgba(255, 82, 82, 0); } }
+        /* --- ANIMATION CLASSES --- */
+        @keyframes slideUp { to { opacity: 1; transform: translateY(0); } }
 
         @media (max-width: 768px) {
-            .discount-banner { flex-direction: column; text-align: center; gap: 20px; }
-            nav { flex-direction: column; gap: 15px; padding-bottom: 20px;}
-            .nav-links { margin: 0; }
+            nav { flex-direction: column; border-radius: 20px; padding: 20px; gap: 15px; }
+            .nav-center { flex-wrap: wrap; justify-content: center; }
+            .search-box input { width: 100px; }
+            .hero h1 { font-size: 2.2rem; }
         }
     </style>
 </head>
 <body>
 
+    <!-- 1. Rounded Floating Navbar -->
     <nav>
-        <div class="logo-area">
-            <img src="shinchan.png" alt="Logo" class="logo-img">
-            <span class="brand">Saksham Support</span>
+        <div class="nav-left">
+            <img src="shinchan.png" alt="Saksham" class="logo-img">
+            <h3 style="color: white;">Saksham</h3>
         </div>
-        <div class="nav-links">
-            <a href="#">Home</a>
-            <a href="#shop">Equipment Shop</a>
-            <a href="#schemes">Govt Schemes</a>
-            <a href="#medical">Medical</a>
+
+        <div class="nav-center">
+            <a href="#" class="nav-link">Home</a>
+            <a href="#" class="nav-link">About</a>
+            <a href="#shop" class="nav-link">Buy Me</a>
+            <a href="#" class="nav-link">Account</a>
+            
+            <!-- Search Bar inside Nav -->
+            <div class="search-box">
+                <input type="text" placeholder="Search items...">
+                <i class="fas fa-search"></i>
+            </div>
+        </div>
+
+        <div class="nav-right">
+            <button class="btn-auth btn-login">Login</button>
+            <button class="btn-auth btn-signup">Sign Up</button>
         </div>
     </nav>
 
-    <header class="hero">
-        <div class="hero-content">
-            <h1>Empowering Every Step</h1>
-            <p>Your companion for Medical Aid, Employment, and Assistive Technology.</p>
-        </div>
-    </header>
-
-    <h2 class="section-title" id="shop">Special Equipment Store</h2>
-    <section class="shop-container">
-        
-        <div class="product-card">
-            <span class="badge">20% OFF</span>
-            <div class="product-img"><i class="fas fa-wheelchair"></i></div>
-            <h3>Smart Wheelchair</h3>
-            <div class="price-box">
-                <span class="old-price">₹15,000</span>
-                <span class="new-price">₹12,000</span>
-            </div>
-            <div class="uses">
-                <strong>Uses:</strong> Automated navigation, lightweight, foldable.
-            </div>
-        </div>
-
-        <div class="product-card">
-            <span class="badge">Subsidy Available</span>
-            <div class="product-img"><i class="fas fa-ear-listen"></i></div>
-            <h3>Digital Hearing Aid</h3>
-            <div class="price-box">
-                <span class="old-price">₹5,000</span>
-                <span class="new-price">₹2,500</span>
-            </div>
-            <div class="uses">
-                <strong>Uses:</strong> Noise cancellation, Bluetooth connectivity.
-            </div>
-        </div>
-
-        <div class="product-card">
-            <span class="badge">New Arrival</span>
-            <div class="product-img"><i class="fas fa-walking"></i></div>
-            <h3>Tactile Cane</h3>
-            <div class="price-box">
-                <span class="old-price">₹1,200</span>
-                <span class="new-price">₹999</span>
-            </div>
-            <div class="uses">
-                <strong>Uses:</strong> Sensor-based obstacle detection for visually impaired.
-            </div>
+    <!-- 2. Hero Section -->
+    <section class="hero">
+        <div>
+            <h1>Limitless Living<br><span style="color: var(--primary-green);">Starts Here</span></h1>
+            <p>India's biggest inclusive store & support system.</p>
         </div>
     </section>
 
-    <section class="discount-banner">
-        <div class="discount-text">
-            <h2>🔥 Mega Support Sale</h2>
-            <p>Get flat 40% off on prosthetics with UDID Card verification.</p>
-        </div>
-        <a href="#" class="discount-btn">Claim Offer Now</a>
-    </section>
-
-    <h2 class="section-title" id="schemes">Essential Services</h2>
-    <section class="services-grid">
-        
-        <div class="service-glass" id="medical">
-            <h3><i class="fas fa-user-md"></i> Medical Assistance</h3>
-            <p>Free checkups at partner hospitals. Book priority appointments for physiotherapy and rehabilitation centers near you.</p>
-        </div>
-
-        <div class="service-glass">
-            <h3><i class="fas fa-landmark"></i> Govt Schemes & Jobs</h3>
-            <p>Latest notifications for Reserved Quota Jobs (Group C & D). Apply for Disability Pension and Railway Concession directly.</p>
-        </div>
-
-        <div class="service-glass">
-            <h3><i class="fas fa-scale-balanced"></i> Legal Support</h3>
-            <p>Free legal consultancy for rights protection under the RPWD Act, 2016.</p>
-        </div>
-    </section>
-
-    <footer>
-        <div class="footer-wave">
-            <svg viewBox="0 0 1200 120" preserveAspectRatio="none">
-                <path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z" class="shape-fill"></path>
-            </svg>
-        </div>
-
-        <div class="footer-content">
-            <div class="footer-col">
-                <h4>Saksham Support</h4>
-                <p>Building a world where ability shines brighter than disability.</p>
-            </div>
-            <div class="footer-col">
-                <h4>Quick Links</h4>
-                <ul>
-                    <li>Apply for UDID</li>
-                    <li>Job Portal</li>
-                    <li>Buy Equipment</li>
-                    <li>Contact Us</li>
-                </ul>
-            </div>
-            <div class="footer-col">
-                <h4>Contact</h4>
-                <ul>
-                    <li><i class="fas fa-envelope"></i> help@saksham.org</li>
-                    <li><i class="fas fa-phone"></i> 1800-123-4567</li>
-                    <li><i class="fas fa-map-marker-alt"></i> New Delhi, India</li>
-                </ul>
+    <!-- 3. SLIDER: Assistive Equipment (More Cards, Smaller Size) -->
+    <div class="section-header" id="shop">
+        <span class="section-title">🛍️ Featured Gear</span>
+        <a href="#" class="view-all">View All Products <i class="fas fa-arrow-right"></i></a>
+    </div>
+    
+    <div class="scroll-container">
+        <!-- Repeat these cards for the slider effect -->
+        <!-- Item 1 -->
+        <div class="shop-card">
+            <div class="card-media"><i class="fas fa-wheelchair"></i></div>
+            <div class="card-info">
+                <h4>Auto-Fold Chair</h4>
+                <span class="price">₹12,999</span> <span class="offer">20% OFF</span>
             </div>
         </div>
-    </footer>
 
-    <div class="floating-actions">
-        <div class="float-btn setting-btn" title="Settings">
-            <i class="fas fa-cog"></i>
+        <!-- Item 2 -->
+        <div class="shop-card">
+            <div class="card-media"><i class="fas fa-blind"></i></div>
+            <div class="card-info">
+                <h4>Smart Cane V2</h4>
+                <span class="price">₹1,499</span> <span class="offer">HOT</span>
+            </div>
         </div>
-        <div class="float-btn call-btn" title="Emergency Call">
-            <i class="fas fa-phone-alt"></i>
+
+        <!-- Item 3 -->
+        <div class="shop-card">
+            <div class="card-media"><i class="fas fa-deaf"></i></div>
+            <div class="card-info">
+                <h4>Invisible Aid</h4>
+                <span class="price">₹3,999</span>
+            </div>
+        </div>
+
+        <!-- Item 4 (Video Type) -->
+        <div class="shop-card">
+            <div class="card-media">
+                <i class="fas fa-hand-holding-medical"></i>
+                <div class="video-badge"><i class="fas fa-play"></i></div>
+            </div>
+            <div class="card-info">
+                <h4>Bionic Grip Arm</h4>
+                <span class="price">₹25,000</span>
+            </div>
+        </div>
+
+        <!-- Item 5 -->
+        <div class="shop-card">
+            <div class="card-media"><i class="fas fa-glasses"></i></div>
+            <div class="card-info">
+                <h4>Reading Glasses</h4>
+                <span class="price">₹999</span>
+            </div>
+        </div>
+
+         <!-- Item 6 -->
+         <div class="shop-card">
+            <div class="card-media"><i class="fas fa-crutch"></i></div>
+            <div class="card-info">
+                <h4>Ergo Crutches</h4>
+                <span class="price">₹1,200</span>
+            </div>
         </div>
     </div>
+
+    <!-- 4. VIDEO DEMO SECTION (New Requirement) -->
+    <div class="section-header">
+        <span class="section-title">🎥 See It In Action</span>
+    </div>
+    <div class="video-grid">
+        <div class="video-card" style="background: url('https://images.unsplash.com/photo-1573497491765-dccce02b29df?auto=format&fit=crop&w=400&q=80') center/cover;">
+            <div class="play-btn"><i class="fas fa-play"></i></div>
+            <div class="video-label">How to use the Smart Cane</div>
+        </div>
+        <div class="video-card" style="background: url('https://images.unsplash.com/photo-1584515933487-779824d29309?auto=format&fit=crop&w=400&q=80') center/cover;">
+            <div class="play-btn"><i class="fas fa-play"></i></div>
+            <div class="video-label">Customer Review: Auto-Chair</div>
+        </div>
+        <div class="video-card" style="background: url('https://images.unsplash.com/photo-1632215193206-59f36df4773f?auto=format&fit=crop&w=400&q=80') center/cover;">
+            <div class="play-btn"><i class="fas fa-play"></i></div>
+            <div class="video-label">Applying for UDID Online</div>
+        </div>
+    </div>
+
+    <!-- 5. MEDICAL CORNER -->
+    <div class="medical-section">
+        <div class="section-header">
+            <span class="section-title">🏥 Medical Support Corner</span>
+        </div>
+        <div class="grid-container">
+            <div class="feature-box scroll-hidden">
+                <div class="feature-icon"><i class="fas fa-user-md"></i></div>
+                <h3>Free Checkup</h3>
+                <p>Monthly free camps for orthopaedic assessment.</p>
+                <a href="#" class="action-btn">Find Camp</a>
+            </div>
+            <div class="feature-box scroll-hidden">
+                <div class="feature-icon"><i class="fas fa-pills"></i></div>
+                <h3>Medicine Delivery</h3>
+                <p>Flat 15% off on daily assistive medications.</p>
+                <a href="#" class="action-btn">Order Now</a>
+            </div>
+            <div class="feature-box scroll-hidden">
+                <div class="feature-icon"><i class="fas fa-brain"></i></div>
+                <h3>Therapy Sessions</h3>
+                <p>Book mental health & physio experts.</p>
+                <a href="#" class="action-btn">Book Session</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- 6. GOVERNMENT SCHEMES & JOBS -->
+    <div class="section-header">
+        <span class="section-title">🏛️ Govt. Schemes & Jobs</span>
+    </div>
+    <div class="grid-container">
+        <div class="feature-box scroll-hidden">
+            <div class="feature-icon"><i class="fas fa-train"></i></div>
+            <h3>Railway Concession</h3>
+            <p>Download E-Card for 75% travel discount.</p>
+            <a href="#" class="action-btn">Apply Here</a>
+        </div>
+        <div class="feature-box scroll-hidden">
+            <div class="feature-icon"><i class="fas fa-graduation-cap"></i></div>
+            <h3>Exam Forms</h3>
+            <p>Scribe request form for UPSC/SSC exams.</p>
+            <a href="#" class="action-btn">Request Scribe</a>
+        </div>
+        <div class="feature-box scroll-hidden">
+            <div class="feature-icon"><i class="fas fa-briefcase"></i></div>
+            <h3>Job Portal</h3>
+            <p>Special recruitment drive: Bank & IT Sector.</p>
+            <a href="#" class="action-btn">View Jobs</a>
+        </div>
+        <div class="feature-box scroll-hidden">
+            <div class="feature-icon"><i class="fas fa-id-card"></i></div>
+            <h3>UDID Renewal</h3>
+            <p>Check status or renew your disability card.</p>
+            <a href="#" class="action-btn">Check Status</a>
+        </div>
+    </div>
+
+    <!-- 7. FOOTER (Seamless Wave) -->
+    <div class="footer-wrapper">
+        <div class="wave-divider">
+            <svg viewBox="0 0 1200 120" preserveAspectRatio="none">
+                <path d="M985.66,92.83C906.67,72,823.78,31,743.84,14.19c-82.26-17.34-168.06-16.33-250.45.39-57.84,11.73-114,31.07-172,41.86A600.21,600.21,0,0,1,0,27.35V120H1200V95.8C1132.19,118.92,1055.71,111.31,985.66,92.83Z"></path>
+            </svg>
+        </div>
+        
+        <footer>
+            <div class="footer-grid">
+                <div style="max-width: 300px;">
+                    <h2 style="color: white;">Saksham.</h2>
+                    <p style="opacity: 0.7;">Empowering lives through technology and support since 2025.</p>
+                </div>
+                <div>
+                    <h4>Shop</h4>
+                    <p>Wheelchairs</p>
+                    <p>Hearing Aids</p>
+                    <p>Braille Kits</p>
+                </div>
+                <div>
+                    <h4>Support</h4>
+                    <p>Helpline</p>
+                    <p>Medical Camps</p>
+                    <p>Donations</p>
+                </div>
+                <div>
+                    <h4>Social</h4>
+                    <i class="fab fa-instagram" style="font-size: 1.5rem; margin-right: 10px;"></i>
+                    <i class="fab fa-twitter" style="font-size: 1.5rem; margin-right: 10px;"></i>
+                    <i class="fab fa-youtube" style="font-size: 1.5rem;"></i>
+                </div>
+            </div>
+            
+            <div class="legal-links">
+                <a href="#">Privacy Policy</a> •
+                <a href="#">Terms & Conditions</a> •
+                <a href="#">Returns</a> •
+                <span>© 2025 Saksham Support. All Rights Reserved.</span>
+            </div>
+        </footer>
+    </div>
+
+    <!-- JavaScript for Scroll Reveal Animation -->
+    <script>
+        // Intersection Observer to handle "Scroll Reveal"
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('show');
+                }
+            });
+        });
+
+        // Target all feature boxes
+        const hiddenElements = document.querySelectorAll('.feature-box');
+        hiddenElements.forEach((el) => observer.observe(el));
+    </script>
 
 </body>
 </html>
